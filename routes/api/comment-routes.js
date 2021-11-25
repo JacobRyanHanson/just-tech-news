@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
-
+// Returns all comments from the database.
 router.get('/', (req, res) => {
     Comment.findAll().then(dbUserData => res.json(dbUserData)).catch(err => {
         console.log(err);
         res.status(500).json(err);
     });
 });
-
+// Creates a comment in the database.
 router.post('/', (req, res) => {
     Comment.create({
         comment_text: req.body.comment_text,
@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
         res.status(400).json(err);
     });
 });
-
+// Removes a comment from the database.
 router.delete('/:id', (req, res) => {
     Comment.destroy({
         where: {

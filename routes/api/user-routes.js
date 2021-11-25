@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Vote, Comment } = require("../../models");
 
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method
+    // Finds all the users in the database.
     User.findAll({
         attributes: { exclude: ['password'] }
     }).then(dbUserData => res.json(dbUserData)).catch(err => {
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// Finds a user in the database and displays their information including posts, comments, and votes.
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// POST /api/users
+// Creates a user in the database.
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// Validates a user's login credentials.
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -71,7 +71,7 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'No user with that email address!' });
             return;
         }
-        // Verify user
+
         const validPassword = dbUserData.checkPassword(req.body.password);
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });
@@ -82,7 +82,7 @@ router.post('/login', (req, res) => {
     });
 });
 
-// PUT /api/users/1
+// Updates a user based on the parameters entered. 
 router.put('/:id', (req, res) => {
     User.update(req.body, {
         // Applys hooks to each instance.
@@ -102,7 +102,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// DELETE /api/users/1
+// Deletes a user from the database.
 router.delete('/:id', (req, res) => {
     User.destroy({
         where: {

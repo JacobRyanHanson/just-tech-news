@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Vote, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
-
-
+// Retrieves all posts from the database including commentes and the user.
 router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
@@ -32,7 +31,7 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// Retrieves a comment from the database as above but based on its id.
 router.get('/:id', (req, res) => {
     Post.findOne({
         where: {
@@ -70,7 +69,7 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// Creates a post in the database.
 router.post('/', (req, res) => {
     Post.create({
         title: req.body.title,
@@ -81,15 +80,14 @@ router.post('/', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// Adds an upvote to a comment and a unique vote to the database.
 router.put('/upvote', (req, res) => {
-    // custom static method created in models/Post.js
     Post.upvote(req.body, { Vote }).then(updatedPostData => res.json(updatedPostData)).catch(err => {
         console.log(err);
         res.status(400).json(err);
     });
 });
-
+// Updates the title of the post in the database.
 router.put('/:id', (req, res) => {
     Post.update(
         {
@@ -111,7 +109,7 @@ router.put('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// Deletes a post from the database.
 router.delete('/:id', (req, res) => {
     Post.destroy({
         where: {
