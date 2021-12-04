@@ -51,7 +51,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Creates a user in the database.
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
         email: req.body.email,
