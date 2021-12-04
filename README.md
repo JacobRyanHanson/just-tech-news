@@ -1,7 +1,7 @@
 # Just Tech News
 
 ## Description
-This is a back-end server that stores data pertaning to a comment form.
+This is an interactive comment form.
 
 ## Website
 https://just-tech-news-43250.herokuapp.com/
