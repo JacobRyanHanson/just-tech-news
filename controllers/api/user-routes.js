@@ -97,7 +97,7 @@ router.post('/login', withAuth, (req, res) => {
         });
     });
 });
-
+// Logs the user out.
 router.post('/logout', withAuth, (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
