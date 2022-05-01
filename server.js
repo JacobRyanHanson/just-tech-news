@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const sess = {
-    secret: 'secrete',
+    secret: 'secret',
     cookie: {},
     resave: false,
     saveUninitialized: true,
