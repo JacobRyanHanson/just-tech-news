@@ -3,9 +3,6 @@
 ## Description
 This is an interactive comment form.
 
-## Website
-https://just-tech-news-43250.herokuapp.com/
-
 ## Credit
 Made by Jacob Hanson
 
